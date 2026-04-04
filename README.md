@@ -1,16 +1,44 @@
-# React + Vite
+# MozaicTeck Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+React frontend for the MozaicTeck RAG Chatbot.
+Built as part of a 90-day public AI Engineering challenge.
 
-Currently, two official plugins are available:
+## Live App
+https://mozaicdb.github.io/mozaicteck-frontend
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Backend API
+https://Mozaicteck-mozaicteck-rag.hf.space
 
-## React Compiler
+## Tech Stack
+- React 19
+- Vite 8
+- JavaScript
+- GitHub Pages (deployment)
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Project Structure
 
-## Expanding the ESLint configuration
+📁 mozaicteck-frontend/
+├── 📁 src/
+│   ├── 📁 components/
+│   │   ├── 📄 Header.jsx
+│   │   ├── 📄 ChatWindow.jsx
+│   │   ├── 📄 ChatBubble.jsx
+│   │   └── 📄 InputBox.jsx
+│   ├── 📄 App.jsx
+│   ├── 📄 index.css
+│   └── 📄 main.jsx
+├── 📄 index.html
+├── 📄 package.json
+└── 📄 vite.config.js
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Run Locally
+npm install
+npm run dev
+
+## Deploy to GitHub Pages
+npm run deploy
+
+## Author
+Moses Iluyemi
+Twitter: @MOZAICTECK
+GitHub: github.com/mozaicdb
