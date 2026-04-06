@@ -38,7 +38,8 @@ function App() {
   return (
     <div className="chat-container">
       <Header />
-      <ChatWindow messages={messages} />
+      <ChatWindow messages={messages} onSend={sendMessage} />
+      
       <InputBox onSend={sendMessage} />
     </div>
   )

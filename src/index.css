@@ -202,3 +202,56 @@ body {
   box-sizing: border-box;
   background: #080808;
 }
+
+.welcome-message {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  text-align: center;
+  padding: 2rem;
+  gap: 1rem;
+}
+
+.welcome-icon {
+  font-size: 3rem;
+}
+
+.welcome-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0;
+}
+
+.welcome-subtitle {
+  font-size: 0.95rem;
+  color: #aaaaaa;
+  margin: 0;
+}
+
+.suggestion-chips {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-top: 1rem;
+  width: 100%;
+  max-width: 420px;
+}
+
+.chip {
+  background: transparent;
+  border: 1px solid #ff6b00;
+  color: #ff6b00;
+  padding: 0.6rem 1rem;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  transition: all 0.2s ease;
+}
+
+.chip:hover {
+  background: #ff6b00;
+  color: #ffffff;
+}
