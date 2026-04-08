@@ -1,6 +1,11 @@
 import ChatBubble from './ChatBubble'
+import { useRef, useEffect } from 'react'
 
 function ChatWindow({ messages, onSend }) {
+  const bottomRef = useRef(null)
+  useEffect(() => {
+  bottomRef.current?.scrollIntoView({ behavior: 'smooth' })
+}, [messages])
   return (
     <div className="chat-messages">
       {messages.length === 0 && (
@@ -24,6 +29,7 @@ function ChatWindow({ messages, onSend }) {
       {messages.map((msg, index) => (
         <ChatBubble key={index} text={msg.text} type={msg.type} />
       ))}
+      <div ref={bottomRef} />
     </div>
   )
 }
