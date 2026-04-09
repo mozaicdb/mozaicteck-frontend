@@ -11,7 +11,13 @@ function ChatBubble({ text, type }) {
 
   return (
     <div className={`message ${type}`}>
-      {text}
+      {type === 'thinking' ? (
+  <div className="typing-indicator">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+) : text}
       {type === 'bot' && (
         <button className="copy-btn" onClick={handleCopy}>
           {copied ? 'Copied!' : 'Copy'}
