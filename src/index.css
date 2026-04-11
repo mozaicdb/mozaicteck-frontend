@@ -195,11 +195,16 @@ body {
 .chat-messages::-webkit-scrollbar-thumb { background: #2a2a2a; border-radius: 4px; }
 
 @media(max-width: 600px) {
-  .chat-container { height: 95vh; border-radius: 12px; }
+  .chat-container { 
+    height: 100vh; 
+    border-radius: 0; 
+    width: 100%;
+    border: none;
+  }
   .message { max-width: 90%; }
   .header-subtitle { display: none; }
-  .send-btn { background: #ff6b00; }
-.chat-container { width: 100%; border-radius: 0; }
+  .welcome-title { font-size: 1.2rem; }
+  #root { padding: 0; }
 }
 
 #root {
