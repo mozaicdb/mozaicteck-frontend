@@ -127,7 +127,8 @@ body {
   border-top: 1px solid #1f1f1f;
   display: flex;
   gap: 12px;
-  align-items: center;
+  align-items: flex-end;
+  
 }
 
 .chat-input {
@@ -141,7 +142,11 @@ body {
   font-family: 'Inter', sans-serif;
   outline: none;
   resize: none;
-  height: 50px;
+  min-height: 50px;
+  max-height: 150px;
+  overflow-y: hidden;
+  overflow-wrap: break-word;
+  word-break: break-word;
   transition: border 0.2s;
 }
 

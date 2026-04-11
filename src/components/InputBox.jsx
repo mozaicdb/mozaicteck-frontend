@@ -4,10 +4,12 @@ function InputBox({ onSend }) {
   const [input, setInput] = useState('')
 
   function handleSend() {
-    if (!input.trim()) return
-    onSend(input)
-    setInput('')
-  }
+  if (!input.trim()) return
+  onSend(input)
+  setInput('')
+  document.querySelector('.chat-input').style.height = 'auto'
+}
+  
 
   return (
     <div className="chat-input-area">
@@ -16,7 +18,11 @@ function InputBox({ onSend }) {
         placeholder="Ask a question from your documents..."
         rows="1"
         value={input}
-        onChange={(e) => setInput(e.target.value)}
+        onChange={(e) => {
+  setInput(e.target.value)
+  e.target.style.height = 'auto'
+  e.target.style.height = e.target.scrollHeight + 'px'
+}}
         onKeyDown={(e) => {
           if (e.key === 'Enter' && !e.shiftKey) {
             e.preventDefault()
