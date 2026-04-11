@@ -195,6 +195,8 @@ body {
 .chat-messages::-webkit-scrollbar-thumb { background: #2a2a2a; border-radius: 4px; }
 
 @media(max-width: 600px) {
+  body { padding: 0; }
+  #root { padding: 0; }
   .chat-container { 
     height: 100vh; 
     border-radius: 0; 
@@ -204,7 +206,6 @@ body {
   .message { max-width: 90%; }
   .header-subtitle { display: none; }
   .welcome-title { font-size: 1.2rem; }
-  #root { padding: 0; }
 }
 
 #root {
