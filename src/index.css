@@ -75,6 +75,7 @@ body {
   border-radius: 12px;
   font-size: 14px;
   line-height: 1.7;
+  animation: slideIn 0.4s ease;
 }
 
 .message.user {
@@ -90,6 +91,7 @@ body {
   align-self: flex-start;
   border: 1px solid #2a2a2a;
   border-bottom-left-radius: 4px;
+  animation: slideInLeft 0.4s ease;
 }
 
 .message.thinking {
@@ -98,6 +100,7 @@ body {
   align-self: flex-start;
   border: 1px solid #2a2a2a;
   font-style: italic;
+  animation: slideInLeft 0.4s ease;
 }
 
 .copy-btn {
@@ -282,4 +285,25 @@ body {
 @keyframes bounce {
   0%, 80%, 100% { transform: translateY(0); }
   40% { transform: translateY(-8px); }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
