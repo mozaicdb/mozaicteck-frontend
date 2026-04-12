@@ -195,6 +195,7 @@ body {
 .chat-messages::-webkit-scrollbar-thumb { background: #2a2a2a; border-radius: 4px; }
 
 @media(max-width: 600px) {
+  html { overflow: hidden; }
   body { padding: 0; overflow: hidden; }
   #root { padding: 0; }
   .chat-container { 
@@ -205,7 +206,7 @@ body {
   }
   .message { max-width: 90%; }
   .header-subtitle { display: none; }
-  .welcome-title { font-size: 1rem; }
+  .welcome-title { font-size: 0.9rem; }
 }
 #root {
   width: 100%;
