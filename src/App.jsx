@@ -1,11 +1,13 @@
 import Header from './components/Header'
 import InputBox from './components/InputBox'
 import ChatWindow from './components/ChatWindow'
+import PromptLibrary from './components/PromptLibrary'
 import { useState } from 'react'
 
 function App() {
   const [messages, setMessages] = useState([])
   const [history, setHistory] = useState([])
+  const [view, setView] = useState('chat')
 
   async function sendMessage(question) {
     if (!question) return
@@ -38,9 +40,29 @@ function App() {
   return (
     <div className="chat-container">
       <Header />
-      <ChatWindow messages={messages} onSend={sendMessage} />
-      
-      <InputBox onSend={sendMessage} />
+      <div className="view-toggle">
+        <button
+          className={`toggle-btn ${view === 'chat' ? 'active' : ''}`}
+          onClick={() => setView('chat')}
+        >
+          Chat
+        </button>
+        <button
+          className={`toggle-btn ${view === 'library' ? 'active' : ''}`}
+          onClick={() => setView('library')}
+        >
+          Browse Library
+        </button>
+      </div>
+
+      {view === 'chat' ? (
+        <>
+          <ChatWindow messages={messages} onSend={sendMessage} />
+          <InputBox onSend={sendMessage} />
+        </>
+      ) : (
+        <PromptLibrary />
+      )}
     </div>
   )
 }
