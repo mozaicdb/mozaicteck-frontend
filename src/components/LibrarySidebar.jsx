@@ -11,9 +11,10 @@ function LibrarySidebar({
   activeCategory,
   onCategorySelect,
   onSearch,
-  searchQuery
-}) {
-  // Track whether the sidebar is collapsed or expanded
+  searchQuery,
+  mobileOpen,
+  onMobileClose
+}) {  // Track whether the sidebar is collapsed or expanded
   const [collapsed, setCollapsed] = useState(true)
 
   // Handles sidebar collapse and expand.
@@ -30,9 +31,9 @@ function LibrarySidebar({
     // Main sidebar wrapper. Narrow when collapsed. Wide when expanded.
     // stopPropagation prevents sidebar clicks from reaching the overlay.
     <div
-      className={`library-sidebar ${collapsed ? 'collapsed' : 'expanded'}`}
-      onClick={e => e.stopPropagation()}
-    >
+  className={`library-sidebar ${collapsed ? 'collapsed' : 'expanded'} ${mobileOpen ? 'mobile-open' : ''}`}
+  onClick={e => e.stopPropagation()}
+>
 
       {/* Toggle button to collapse or expand the sidebar.
           Also closes any open panel when clicked. */}
