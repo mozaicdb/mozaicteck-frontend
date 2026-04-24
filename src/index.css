@@ -680,6 +680,7 @@ body {
     border-radius: 0;
     width: 100%;
     border: none;
+    overflow: visible;
   }
 
   .message {
@@ -693,6 +694,8 @@ body {
   .chat-header {
     padding: 10px 12px;
     gap: 8px;
+    overflow: visible;
+    min-height: 52px;
   }
 
   .header-title {
