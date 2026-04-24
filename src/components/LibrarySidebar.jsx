@@ -13,8 +13,10 @@ function LibrarySidebar({
   onSearch,
   searchQuery,
   mobileOpen,
-  onMobileClose
-}) {  // Track whether the sidebar is collapsed or expanded
+  onMobileClose,
+  panelActive
+}) {
+  // Track whether the sidebar is collapsed or expanded
   const [collapsed, setCollapsed] = useState(true)
 
   // Handles sidebar collapse and expand.
@@ -31,9 +33,9 @@ function LibrarySidebar({
     // Main sidebar wrapper. Narrow when collapsed. Wide when expanded.
     // stopPropagation prevents sidebar clicks from reaching the overlay.
     <div
-  className={`library-sidebar ${collapsed ? 'collapsed' : 'expanded'} ${mobileOpen ? 'mobile-open' : ''}`}
-  onClick={e => e.stopPropagation()}
->
+      className={`library-sidebar ${collapsed ? 'collapsed' : 'expanded'} ${mobileOpen ? 'mobile-open' : ''}`}
+      onClick={e => e.stopPropagation()}
+    >
 
       {/* Toggle button to collapse or expand the sidebar.
           Also closes any open panel when clicked. */}
@@ -87,88 +89,6 @@ function LibrarySidebar({
         🕐
         {!collapsed && <span>History</span>}
       </button>
-
-      {/* Floating search panel. Appears when search icon is clicked. */}
-      {activePanel === 'search' && (
-        <div className="sidebar-panel" onClick={e => e.stopPropagation()}>
-          {/* Panel header with title and close button */}
-          <div className="panel-header">
-            <span>Search Prompts</span>
-            <button
-              className="panel-close"
-              style={{ cursor: 'pointer' }}
-              onClick={(e) => {
-                e.stopPropagation()
-                onPanelToggle('search')
-              }}
-            >✕</button>
-          </div>
-          {/* Search input. Calls onSearch as user types. */}
-          <input
-            className="panel-search-input"
-            type="text"
-            placeholder="Type a keyword..."
-            value={searchQuery}
-            onChange={onSearch}
-            autoFocus
-          />
-        </div>
-      )}
-
-      {/* Floating categories panel. Appears when categories icon is clicked. */}
-      {activePanel === 'categories' && (
-        <div className="sidebar-panel" onClick={e => e.stopPropagation()}>
-          {/* Panel header with title and close button */}
-          <div className="panel-header">
-            <span>Categories</span>
-            <button
-              className="panel-close"
-              style={{ cursor: 'pointer' }}
-              onClick={(e) => {
-                e.stopPropagation()
-                onPanelToggle('categories')
-              }}
-            >✕</button>
-          </div>
-          {/* List of category buttons. Active category is highlighted orange. */}
-          <div className="panel-categories">
-            {categories.map(cat => (
-              <button
-                key={cat}
-                className={`panel-category-btn ${activeCategory === cat ? 'active' : ''}`}
-                style={{ cursor: 'pointer' }}
-                onClick={(e) => {
-                  e.stopPropagation()
-                  onCategorySelect(cat)
-                }}
-              >
-                {cat}
-              </button>
-            ))}
-          </div>
-        </div>
-      )}
-
-      {/* Floating history panel. Coming soon until authentication is built in Days 31 to 40. */}
-      {activePanel === 'history' && (
-        <div className="sidebar-panel" onClick={e => e.stopPropagation()}>
-          <div className="panel-header">
-            <span>History</span>
-            <button
-              className="panel-close"
-              style={{ cursor: 'pointer' }}
-              onClick={(e) => {
-                e.stopPropagation()
-                onPanelToggle('history')
-              }}
-            >✕</button>
-          </div>
-          <div className="panel-coming-soon">
-            <p>🔒 Coming soon</p>
-            <p>History will be available after you create an account.</p>
-          </div>
-        </div>
-      )}
 
     </div>
   )
