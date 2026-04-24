@@ -4,6 +4,13 @@ import ChatWindow from './components/ChatWindow'
 import PromptLibrary from './components/PromptLibrary'
 import { useState } from 'react'
 
+const API_BASE = 'https://Mozaicteck-mozaicteck-rag.hf.space'
+
+// Generate a unique session id when the app first loads.
+// This id stays the same for the entire session.
+// It will be linked to a real user account after authentication is built.
+const sessionId = crypto.randomUUID()
+
 function App() {
   const [messages, setMessages] = useState([])
   const [history, setHistory] = useState([])
@@ -16,7 +23,7 @@ function App() {
     setMessages(prev => [...prev, { text: 'Searching your documents...', type: 'thinking' }])
 
     try {
-      const response = await fetch('https://Mozaicteck-mozaicteck-rag.hf.space/ask', {
+      const response = await fetch(`${API_BASE}/ask`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ question: question, history: history })
@@ -30,6 +37,18 @@ function App() {
         { role: "user", content: question },
         { role: "assistant", content: data.answer }
       ])
+
+      // Save the conversation to MongoDB after every message exchange.
+      // Uses the session id generated when the app loaded.
+      await fetch(`${API_BASE}/conversations/save`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          session_id: sessionId,
+          user_message: question,
+          bot_response: data.answer
+        })
+      })
 
     } catch (error) {
       setMessages(prev => prev.filter(m => m.type !== 'thinking'))
