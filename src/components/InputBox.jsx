@@ -15,7 +15,7 @@ function InputBox({ onSend }) {
     <div className="chat-input-area">
       <textarea
         className="chat-input"
-        placeholder="Ask a question from your documents..."
+        placeholder="Ask me anything about prompts..."
         rows="1"
         value={input}
         onChange={(e) => {
