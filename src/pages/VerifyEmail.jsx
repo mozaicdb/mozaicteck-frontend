@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 import { verifyEmail } from '../utils/auth'
 
@@ -6,8 +6,12 @@ function VerifyEmail() {
   const [searchParams] = useSearchParams()
   const navigate = useNavigate()
   const [status, setStatus] = useState('verifying')
+  const hasVerified = useRef(false)
 
   useEffect(() => {
+    if (hasVerified.current) return
+    hasVerified.current = true
+
     const token = searchParams.get('token')
 
     if (!token) {

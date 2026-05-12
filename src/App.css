@@ -276,10 +276,16 @@ body {
 /* View Toggle */
 .view-toggle {
   display: flex;
-  gap: 10px;
+  justify-content: space-between;
+  align-items: center;
   padding: 12px 24px;
   background: #0f0f0f;
   border-bottom: 1px solid #2a2a2a;
+}
+
+.toggle-left {
+  display: flex;
+  gap: 10px;
 }
 
 .toggle-btn {
@@ -1118,4 +1124,38 @@ body {
   border-radius: 8px;
   margin-bottom: 16px;
   font-size: 0.9rem;
+}
+
+/* Password Toggle */
+.password-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.password-wrapper input {
+  width: 100%;
+  padding-right: 40px;
+}
+
+.eye-icon {
+  position: absolute;
+  right: 12px;
+  cursor: pointer;
+  font-size: 18px;
+  user-select: none;
+}
+
+.rule {
+  display: block;
+  font-size: 0.82rem;
+  color: #888;
+  margin: 2px 0;
+}
+
+.rule.valid {
+  color: #22cc66;
+}
+.rule.error {
+  color: #ff4d4d;
 }

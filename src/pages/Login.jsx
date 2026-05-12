@@ -8,8 +8,10 @@ function Login() {
   const [formData, setFormData] = useState({ email: '', password: '' })
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
+  const [showPassword, setShowPassword] = useState(false)
 
   const successMessage = location.state?.message
+  window.history.replaceState({}, document.title)
 
   function handleChange(e) {
     setFormData(prev => ({ ...prev, [e.target.name]: e.target.value }))
@@ -56,20 +58,32 @@ function Login() {
 
           <div className="auth-field">
             <label>Password</label>
-            <input
-              type="password"
-              name="password"
-              value={formData.password}
-              onChange={handleChange}
-              placeholder="Enter password"
-              required
-            />
+            <div className="password-wrapper">
+              <input
+                type={showPassword ? 'text' : 'password'}
+                name="password"
+                value={formData.password}
+                onChange={handleChange}
+                placeholder="Enter password"
+                required
+              />
+              <span
+                className="eye-icon"
+                onClick={() => setShowPassword(prev => !prev)}
+              >
+                {showPassword ? '🙈' : '👁️'}
+              </span>
+            </div>
           </div>
 
           <button type="submit" className="auth-btn" disabled={loading}>
             {loading ? 'Logging in...' : 'Login'}
           </button>
         </form>
+
+        <p className="auth-switch">
+          <span onClick={() => navigate('/forgot-password')}>Forgot password?</span>
+        </p>
 
         <p className="auth-switch">
           Don't have an account?{' '}

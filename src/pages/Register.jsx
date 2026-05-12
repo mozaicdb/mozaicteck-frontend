@@ -16,6 +16,9 @@ function Register() {
   const [phone, setPhone] = useState('')
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
+  const [showPassword, setShowPassword] = useState(false)
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false)
+  const [touched, setTouched] = useState(false)
 
   const passwordRules = [
     { label: 'At least 8 characters', test: (p) => p.length >= 8 },
@@ -26,6 +29,7 @@ function Register() {
   ]
 
   function handleChange(e) {
+    if (e.target.name === 'password') setTouched(true)
     setFormData(prev => ({ ...prev, [e.target.name]: e.target.value }))
   }
 
@@ -117,21 +121,29 @@ function Register() {
 
           <div className="auth-field">
             <label>Password</label>
-            <input
-              type="password"
-              name="password"
-              value={formData.password}
-              onChange={handleChange}
-              placeholder="Enter password"
-              required
-            />
+            <div className="password-wrapper">
+              <input
+                type={showPassword ? 'text' : 'password'}
+                name="password"
+                value={formData.password}
+                onChange={handleChange}
+                placeholder="Enter password"
+                required
+              />
+              <span
+                className="eye-icon"
+                onClick={() => setShowPassword(prev => !prev)}
+              >
+                {showPassword ? '🙈' : '👁️'}
+              </span>
+            </div>
             <div className="password-rules">
               {passwordRules.map((rule, index) => (
                 <p
                   key={index}
-                  className={rule.test(formData.password) ? 'rule-pass' : 'rule-fail'}
+                  className={rule.test(formData.password) ? 'rule valid' : touched ? 'rule error' : 'rule'}
                 >
-                  {rule.test(formData.password) ? '✓' : '✗'} {rule.label}
+                  {rule.test(formData.password) ? '✓' : touched ? '✗' : '✓'} {rule.label}
                 </p>
               ))}
             </div>
@@ -139,16 +151,24 @@ function Register() {
 
           <div className="auth-field">
             <label>Confirm Password</label>
-            <input
-              type="password"
-              name="confirmPassword"
-              value={formData.confirmPassword}
-              onChange={handleChange}
-              placeholder="Repeat password"
-              required
-            />
+            <div className="password-wrapper">
+              <input
+                type={showConfirmPassword ? 'text' : 'password'}
+                name="confirmPassword"
+                value={formData.confirmPassword}
+                onChange={handleChange}
+                placeholder="Repeat password"
+                required
+              />
+              <span
+                className="eye-icon"
+                onClick={() => setShowConfirmPassword(prev => !prev)}
+              >
+                {showConfirmPassword ? '🙈' : '👁️'}
+              </span>
+            </div>
             {formData.confirmPassword && (
-              <p className={formData.password === formData.confirmPassword ? 'rule-pass' : 'rule-fail'}>
+              <p className={formData.password === formData.confirmPassword ? 'rule valid' : 'rule error'}>
                 {formData.password === formData.confirmPassword ? '✓ Passwords match' : '✗ Passwords do not match'}
               </p>
             )}

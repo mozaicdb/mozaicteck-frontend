@@ -3,6 +3,8 @@ import InputBox from '../components/InputBox'
 import ChatWindow from '../components/ChatWindow'
 import PromptLibrary from '../components/PromptLibrary'
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { logoutUser } from '../utils/auth'
 
 const API_BASE = 'https://Mozaicteck-mozaicteck-rag.hf.space'
 
@@ -12,6 +14,12 @@ function Chatbot() {
   const [messages, setMessages] = useState([])
   const [history, setHistory] = useState([])
   const [view, setView] = useState('chat')
+  const navigate = useNavigate()
+
+  async function handleLogout() {
+    await logoutUser()
+    navigate('/login')
+  }
 
   async function sendMessage(question) {
     if (!question) return
@@ -55,17 +63,22 @@ function Chatbot() {
     <div className="chat-container">
       <Header />
       <div className="view-toggle">
-        <button
-          className={`toggle-btn ${view === 'chat' ? 'active' : ''}`}
-          onClick={() => setView('chat')}
-        >
-          Chat
-        </button>
-        <button
-          className={`toggle-btn ${view === 'library' ? 'active' : ''}`}
-          onClick={() => setView('library')}
-        >
-          Browse Library
+        <div className="toggle-left">
+          <button
+            className={`toggle-btn ${view === 'chat' ? 'active' : ''}`}
+            onClick={() => setView('chat')}
+          >
+            Chat
+          </button>
+          <button
+            className={`toggle-btn ${view === 'library' ? 'active' : ''}`}
+            onClick={() => setView('library')}
+          >
+            Browse Library
+          </button>
+        </div>
+        <button className="toggle-btn logout-btn" onClick={handleLogout}>
+          Logout
         </button>
       </div>
 
