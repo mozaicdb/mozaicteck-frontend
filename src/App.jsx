@@ -7,6 +7,7 @@ import Login from './pages/Login'
 import VerifyEmail from './pages/VerifyEmail'
 import ForgotPassword from './pages/ForgotPassword'
 import ResetPassword from './pages/ResetPassword'
+import Profile from './pages/Profile'
 import { getMe } from './utils/auth'
 
 function PrivateRoute({ children }) {
@@ -15,7 +16,7 @@ function PrivateRoute({ children }) {
   useEffect(() => {
     getMe()
       .then(result => {
-        if (result.user) {
+        if (result && result.user) {
           setStatus('allowed')
         } else {
           setStatus('denied')
@@ -40,6 +41,7 @@ function App() {
         <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route path="/reset-password" element={<ResetPassword />} />
         <Route path="/chatbot" element={<PrivateRoute><Chatbot /></PrivateRoute>} />
+        <Route path="/profile" element={<PrivateRoute><Profile /></PrivateRoute>} />
       </Routes>
     </BrowserRouter>
   )

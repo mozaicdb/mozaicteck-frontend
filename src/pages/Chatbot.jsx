@@ -4,7 +4,7 @@ import ChatWindow from '../components/ChatWindow'
 import PromptLibrary from '../components/PromptLibrary'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { logoutUser } from '../utils/auth'
+import { logoutUser, fetchWithRefresh } from '../utils/auth'
 
 const API_BASE = 'https://Mozaicteck-mozaicteck-rag.hf.space'
 
@@ -28,13 +28,11 @@ function Chatbot() {
     setMessages(prev => [...prev, { text: 'Searching your documents...', type: 'thinking' }])
 
     try {
-      const response = await fetch(`${API_BASE}/ask`, {
+      const data = await fetchWithRefresh(`${API_BASE}/ask`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ question: question, history: history })
       })
-
-      const data = await response.json()
 
       setMessages(prev => prev.filter(m => m.type !== 'thinking'))
       setMessages(prev => [...prev, { text: data.answer, type: 'bot' }])
@@ -43,7 +41,7 @@ function Chatbot() {
         { role: "assistant", content: data.answer }
       ])
 
-      await fetch(`${API_BASE}/conversations/save`, {
+      await fetchWithRefresh(`${API_BASE}/conversations/save`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -64,22 +62,27 @@ function Chatbot() {
       <Header />
       <div className="view-toggle">
         <div className="toggle-left">
-          <button
-            className={`toggle-btn ${view === 'chat' ? 'active' : ''}`}
-            onClick={() => setView('chat')}
-          >
-            Chat
-          </button>
-          <button
-            className={`toggle-btn ${view === 'library' ? 'active' : ''}`}
-            onClick={() => setView('library')}
-          >
-            Browse Library
-          </button>
-        </div>
-        <button className="toggle-btn logout-btn" onClick={handleLogout}>
-          Logout
-        </button>
+  <button
+    className={`toggle-btn ${view === 'chat' ? 'active' : ''}`}
+    onClick={() => setView('chat')}
+  >
+    Chat
+  </button>
+  <button
+    className={`toggle-btn ${view === 'library' ? 'active' : ''}`}
+    onClick={() => setView('library')}
+  >
+    Browse Library
+  </button>
+</div>
+<div className="toggle-right">
+  <button className="toggle-btn profile-btn" onClick={() => navigate('/profile')}>
+    My Profile
+  </button>
+  <button className="toggle-btn logout-btn" onClick={handleLogout}>
+    Logout
+  </button>
+</div>
       </div>
 
       {view === 'chat' ? (

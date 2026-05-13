@@ -1,5 +1,31 @@
 const API_BASE = 'https://Mozaicteck-mozaicteck-rag.hf.space'
 
+async function refreshToken() {
+  const response = await fetch(`${API_BASE}/auth/refresh`, {
+    method: 'POST',
+    credentials: 'include'
+  })
+  return response.ok
+}
+
+export async function fetchWithRefresh(url, options = {}) {
+  const response = await fetch(url, { ...options, credentials: 'include' })
+
+  if (response.status === 401) {
+    const refreshed = await refreshToken()
+
+    if (refreshed) {
+      const retry = await fetch(url, { ...options, credentials: 'include' })
+      return retry.json()
+    } else {
+      window.location.href = '/mozaicteck-frontend/login'
+      return null
+    }
+  }
+
+  return response.json()
+}
+
 export async function registerUser(data) {
   const response = await fetch(`${API_BASE}/auth/register`, {
     method: 'POST',
@@ -29,11 +55,9 @@ export async function logoutUser() {
 }
 
 export async function getMe() {
-  const response = await fetch(`${API_BASE}/auth/me`, {
-    method: 'GET',
-    credentials: 'include'
+  return fetchWithRefresh(`${API_BASE}/auth/me`, {
+    method: 'GET'
   })
-  return response.json()
 }
 
 export async function forgotPassword(email) {
