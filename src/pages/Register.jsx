@@ -64,9 +64,13 @@ function Register() {
     navigate('/login', { state: { message: 'Registration successful. Please check your email to verify your account.' } })
   }
 
-  function handleGoogleLogin() {
-    window.location.href = `${API_BASE}/auth/google/login`
+  async function handleGoogleLogin() {
+  const response = await fetch(`${API_BASE}/auth/google/login`)
+  const data = await response.json()
+  if (data.url) {
+    window.location.href = data.url
   }
+}
 
   return (
     <div className="auth-container">
