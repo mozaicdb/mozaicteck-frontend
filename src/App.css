@@ -1,30 +1,24 @@
+/* -------------------- GOOGLE FONTS -------------------- */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap');
 
-* { box-sizing: border-box; margin: 0; padding: 0; }
-
-body {
-  font-family: 'Inter', sans-serif;
-  background: #080808;
-  color: #f0f0f0;
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 16px;
+/* -------------------- GLOBAL RESET -------------------- */
+/* Removes default margin, padding, and sets box-sizing for all elements */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
+/* -------------------- ROOT CONTAINER -------------------- */
+/* The main div that wraps the entire React app */
 #root {
   width: 100%;
-  height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 16px;
-  box-sizing: border-box;
+  min-height: 100vh;
   background: #080808;
 }
 
+/* -------------------- CHAT CONTAINER -------------------- */
+/* The main chat box that holds the header, messages, and input */
 .chat-container {
   width: 100%;
   max-width: 800px;
@@ -35,8 +29,11 @@ body {
   border-radius: 16px;
   border: 1px solid #1f1f1f;
   overflow: hidden;
+  margin: 0 auto;
 }
 
+/* -------------------- CHAT HEADER -------------------- */
+/* Top bar of the chat that shows the title and status dot */
 .chat-header {
   padding: 12px 16px;
   background: #111;
@@ -48,6 +45,7 @@ body {
   min-height: 56px;
 }
 
+/* Green pulsing dot that shows the bot is online */
 .header-dot {
   width: 10px;
   height: 10px;
@@ -73,6 +71,8 @@ body {
   margin-left: auto;
 }
 
+/* -------------------- CHAT MESSAGES AREA -------------------- */
+/* Scrollable area where all messages appear */
 .chat-messages {
   flex: 1;
   overflow-y: auto;
@@ -82,6 +82,7 @@ body {
   gap: 16px;
 }
 
+/* Base style for every message bubble */
 .message {
   max-width: 75%;
   padding: 14px 18px;
@@ -93,6 +94,7 @@ body {
   overflow-wrap: break-word;
 }
 
+/* User message - orange, aligned right */
 .message.user {
   background: #ff6b00;
   color: #fff;
@@ -100,6 +102,7 @@ body {
   border-bottom-right-radius: 4px;
 }
 
+/* Bot message - dark, aligned left */
 .message.bot {
   background: #1a1a1a;
   color: #e0e0e0;
@@ -109,6 +112,7 @@ body {
   animation: slideInLeft 0.4s ease;
 }
 
+/* Thinking indicator while bot is processing */
 .message.thinking {
   background: #1a1a1a;
   color: #555;
@@ -118,6 +122,8 @@ body {
   animation: slideInLeft 0.4s ease;
 }
 
+/* -------------------- CHAT INPUT AREA -------------------- */
+/* Bottom section with the text input and send button */
 .chat-input-area {
   padding: 16px 24px;
   background: #111;
@@ -127,6 +133,7 @@ body {
   align-items: flex-end;
 }
 
+/* The textarea where the user types */
 .chat-input {
   flex: 1;
   background: #1a1a1a;
@@ -155,6 +162,7 @@ body {
   box-shadow: 0 0 0 3px rgba(255, 107, 0, 0.15);
 }
 
+/* Orange send button */
 .send-btn {
   background: #ff6b00;
   border: none;
@@ -178,6 +186,8 @@ body {
   fill: #fff;
 }
 
+/* -------------------- WELCOME MESSAGE -------------------- */
+/* Shows when there are no messages yet */
 .welcome-message {
   display: flex;
   flex-direction: column;
@@ -211,6 +221,8 @@ body {
   margin: 0;
 }
 
+/* -------------------- SUGGESTION CHIPS -------------------- */
+/* Clickable prompt suggestions shown on the welcome screen */
 .suggestion-chips {
   display: flex;
   flex-direction: column;
@@ -236,6 +248,8 @@ body {
   color: #ffffff;
 }
 
+/* -------------------- TYPING INDICATOR -------------------- */
+/* Three bouncing dots shown while bot is thinking */
 .typing-indicator {
   display: flex;
   gap: 5px;
@@ -254,6 +268,7 @@ body {
 .typing-indicator span:nth-child(2) { animation-delay: 0.2s; }
 .typing-indicator span:nth-child(3) { animation-delay: 0.4s; }
 
+/* -------------------- ANIMATIONS -------------------- */
 @keyframes bounce {
   0%, 80%, 100% { transform: translateY(0); }
   40% { transform: translateY(-8px); }
@@ -269,11 +284,13 @@ body {
   to { opacity: 1; transform: translateX(0); }
 }
 
+/* -------------------- SCROLLBAR STYLING -------------------- */
 .chat-messages::-webkit-scrollbar { width: 4px; }
 .chat-messages::-webkit-scrollbar-track { background: transparent; }
 .chat-messages::-webkit-scrollbar-thumb { background: #2a2a2a; border-radius: 4px; }
 
-/* View Toggle */
+/* -------------------- VIEW TOGGLE -------------------- */
+/* The Chat / Prompt Library toggle buttons in the header */
 .view-toggle {
   display: flex;
   justify-content: space-between;
@@ -286,6 +303,12 @@ body {
 .toggle-left {
   display: flex;
   gap: 10px;
+}
+
+.toggle-right {
+  display: flex;
+  gap: 10px;
+  align-items: center;
 }
 
 .toggle-btn {
@@ -310,6 +333,8 @@ body {
   color: #fff;
 }
 
+/* -------------------- PROMPT LIBRARY GRID -------------------- */
+/* Two column grid that shows all prompt cards */
 .prompt-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -320,6 +345,7 @@ body {
   align-items: start;
 }
 
+/* Individual prompt card */
 .prompt-card {
   background: #1a1a1a;
   border: 1.5px solid #2a2a2a;
@@ -330,10 +356,19 @@ body {
   gap: 10px;
   transition: border 0.2s ease;
   min-height: 260px;
+  cursor: pointer;
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
 }
 
 .prompt-card:hover {
   border-color: #ff6b00;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 24px rgba(249, 115, 22, 0.15);
+}
+
+.prompt-card.expanded {
+  border-color: #f97316;
+  box-shadow: 0 6px 24px rgba(249, 115, 22, 0.25);
 }
 
 .prompt-title {
@@ -351,6 +386,7 @@ body {
   flex: 1;
 }
 
+/* -------------------- PROMPT TAGS -------------------- */
 .prompt-tags {
   display: flex;
   gap: 8px;
@@ -374,6 +410,17 @@ body {
   color: #ff6b00;
 }
 
+.tag.tier.free {
+  background: #22c55e20;
+  color: #22c55e;
+}
+
+.tag.tier.premium {
+  background: #ff6b0020;
+  color: #ff6b00;
+}
+
+/* -------------------- COPY BUTTON -------------------- */
 .copy-btn {
   align-self: flex-end;
   padding: 8px 10px;
@@ -392,14 +439,10 @@ body {
   height: 36px;
 }
 
-.copy-btn:hover {
-  background: #e55e00;
-}
+.copy-btn:hover { background: #e55e00; }
+.copy-btn.copied { background: #22c55e; }
 
-.copy-btn.copied {
-  background: #22c55e;
-}
-
+/* -------------------- LIBRARY LOADING AND EMPTY STATES -------------------- */
 .library-loading {
   color: #aaaaaa;
   text-align: center;
@@ -407,11 +450,19 @@ body {
 }
 
 .library-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 200px;
   color: #aaaaaa;
+  font-size: 14px;
+  gap: 8px;
   text-align: center;
-  padding: 40px;
 }
 
+/* -------------------- LIBRARY LAYOUT -------------------- */
+/* Sidebar and main content side by side */
 .library-layout {
   display: flex;
   height: calc(100vh - 120px);
@@ -419,6 +470,7 @@ body {
   position: relative;
 }
 
+/* -------------------- LIBRARY SIDEBAR -------------------- */
 .library-sidebar {
   display: flex;
   flex-direction: column;
@@ -486,9 +538,7 @@ body {
   color: #ff6b00;
 }
 
-.sidebar-icon-btn:hover span {
-  color: #ff6b00;
-}
+.sidebar-icon-btn:hover span { color: #ff6b00; }
 
 .sidebar-icon-btn.active {
   background: #ff6b0015;
@@ -496,10 +546,10 @@ body {
   color: #ff6b00;
 }
 
-.sidebar-icon-btn.active span {
-  color: #ff6b00;
-}
+.sidebar-icon-btn.active span { color: #ff6b00; }
 
+/* -------------------- SIDEBAR PANEL -------------------- */
+/* Floating panel that opens when a sidebar icon is clicked */
 .sidebar-panel {
   position: absolute;
   left: 64px;
@@ -537,7 +587,7 @@ body {
   border: none;
   color: #aaaaaa;
   font-size: 14px;
-  cursor: pointer !important;
+  cursor: pointer;
   padding: 2px 6px;
   border-radius: 4px;
   transition: all 0.2s ease;
@@ -609,6 +659,7 @@ body {
   line-height: 1.8;
 }
 
+/* -------------------- LIBRARY MAIN CONTENT -------------------- */
 .library-main {
   flex: 1;
   display: flex;
@@ -625,31 +676,7 @@ body {
   border-bottom: 1px solid #2a2a2a;
 }
 
-.library-context strong {
-  color: #ff6b00;
-}
-
-.tag.tier.free {
-  background: #22c55e20;
-  color: #22c55e;
-}
-
-.tag.tier.premium {
-  background: #ff6b0020;
-  color: #ff6b00;
-}
-
-.library-empty {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 200px;
-  color: #aaaaaa;
-  font-size: 14px;
-  gap: 8px;
-  text-align: center;
-}
+.library-context strong { color: #ff6b00; }
 
 .prompt-grid::-webkit-scrollbar { width: 4px; }
 .prompt-grid::-webkit-scrollbar-track { background: transparent; }
@@ -665,173 +692,7 @@ body {
   background: transparent;
 }
 
-.mobile-menu-btn {
-  display: none;
-}
-
-@media (max-width: 768px) {
-
-  html { overflow: hidden; }
-  body { padding: 0; overflow: hidden; }
-  #root { padding: 0; }
-
-  .chat-container {
-    height: 100vh;
-    border-radius: 0;
-    width: 100%;
-    border: none;
-    overflow: visible;
-  }
-
-  .message {
-    max-width: 90%;
-  }
-
-  .header-subtitle {
-    display: none;
-  }
-
-  .chat-header {
-    padding: 10px 12px;
-    gap: 8px;
-    overflow: visible;
-    min-height: 52px;
-  }
-
-  .header-title {
-    font-size: 14px;
-  }
-
-  .header-dot {
-    width: 8px;
-    height: 8px;
-    flex-shrink: 0;
-  }
-
-  .prompt-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .welcome-message {
-    padding: 8px 12px;
-    gap: 0.5rem;
-    justify-content: center;
-    padding-top: 20px;
-  }
-
-  .welcome-icon {
-    margin-top: 8px;
-  }
-
-  .welcome-icon svg {
-    width: 28px;
-    height: 28px;
-  }
-
-  .welcome-title {
-    font-size: 1.1rem;
-  }
-
-  .welcome-subtitle {
-    font-size: 0.8rem;
-  }
-
-  .chip {
-    padding: 0.4rem 0.75rem;
-    font-size: 0.78rem;
-  }
-
-  .mobile-menu-btn {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-    position: fixed;
-    bottom: 16px;
-    right: 24px;
-    width: 44px;
-    height: 44px;
-    background: #f97316;
-    border: none;
-    border-radius: 50%;
-    padding: 14px;
-    cursor: pointer;
-    z-index: 1000;
-    box-shadow: 0 4px 20px rgba(249, 115, 22, 0.5);
-    transition: background 0.3s ease, transform 0.3s ease;
-  }
-
-  .mobile-menu-btn span {
-    display: block;
-    width: 22px;
-    height: 2px;
-    background: #fff;
-    border-radius: 2px;
-    transition: transform 0.3s ease, opacity 0.3s ease;
-    transform-origin: center;
-  }
-
-  .mobile-menu-btn.is-open span:nth-child(1) {
-    transform: translateY(8px) rotate(45deg);
-  }
-
-  .mobile-menu-btn.is-open span:nth-child(2) {
-    opacity: 0;
-  }
-
-  .mobile-menu-btn.is-open span:nth-child(3) {
-    transform: translateY(-8px) rotate(-45deg);
-  }
-
-  .library-sidebar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    height: 100vh;
-    z-index: 900;
-    transform: translateX(-100%);
-    transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-  }
-
-  .library-sidebar.mobile-open {
-    transform: translateX(0);
-  }
-
-  .library-sidebar.panel-active {
-    display: none;
-  }
-
-  .sidebar-panel {
-    position: fixed;
-    left: 0;
-    top: 0;
-    width: 100vw;
-    height: auto;
-    max-height: 80vh;
-    border-radius: 0 0 16px 16px;
-    overflow-y: auto;
-    z-index: 1100;
-    box-sizing: border-box;
-  }
-
-}
-
-/* Prompt Card Expand and Stages */
-.prompt-card {
-  cursor: pointer;
-  transition: box-shadow 0.3s ease, transform 0.3s ease;
-}
-
-.prompt-card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 24px rgba(249, 115, 22, 0.15);
-}
-
-.prompt-card.expanded {
-  border-color: #f97316;
-  box-shadow: 0 6px 24px rgba(249, 115, 22, 0.25);
-}
-
+/* -------------------- PROMPT CARD EXPAND -------------------- */
 .prompt-stages {
   margin-top: 16px;
   padding-top: 16px;
@@ -883,15 +744,14 @@ body {
   transition: transform 0.3s ease;
 }
 
-.card-expand-arrow svg {
-  transition: transform 0.3s ease;
-}
+.card-expand-arrow svg { transition: transform 0.3s ease; }
 
 .prompt-card.expanded .card-expand-arrow svg {
   transform: rotate(180deg);
 }
 
-/* Landing Page */
+/* -------------------- LANDING PAGE -------------------- */
+/* The first page users see before logging in */
 .landing-container {
   min-height: 100vh;
   display: flex;
@@ -939,9 +799,7 @@ body {
   cursor: pointer;
 }
 
-.landing-btn-primary:hover {
-  background-color: #cf5a09;
-}
+.landing-btn-primary:hover { background-color: #cf5a09; }
 
 .landing-btn-secondary {
   background-color: transparent;
@@ -959,24 +817,28 @@ body {
   color: #ffffff;
 }
 
-/* Auth Pages */
+/* -------------------- AUTH PAGES -------------------- */
+/* Shared styles for Login, Register, Forgot Password, Reset Password pages */
 .auth-container {
-  min-height: 100vh;
-  display: flex;
-  align-items: flex-start;
-  justify-content: center;
   background-color: #080808;
-  padding: 120px 24px 40px;
+  min-height: 100vh;
+  padding: 40px 24px;
+  display: flex;
+  justify-content: center;
 }
 
-.auth-title {.auth-card {
+/* The white card that wraps the form */
+.auth-card {
   background-color: #111111;
   border: 1px solid #222222;
   border-radius: 12px;
   padding: 40px;
   width: 100%;
   max-width: 480px;
+  height: fit-content;
 }
+
+.auth-title {
   font-size: 1.8rem;
   font-weight: 700;
   color: #ffffff;
@@ -989,6 +851,7 @@ body {
   font-size: 0.95rem;
 }
 
+/* Red error box shown when something goes wrong */
 .auth-error {
   background-color: #2a1010;
   border: 1px solid #ff4444;
@@ -999,17 +862,31 @@ body {
   font-size: 0.9rem;
 }
 
+/* Green success box shown after registration */
+.auth-success {
+  background-color: #0f2a1a;
+  border: 1px solid #22cc66;
+  color: #22cc66;
+  padding: 12px;
+  border-radius: 8px;
+  margin-bottom: 16px;
+  font-size: 0.9rem;
+}
+
+/* The form itself */
 .auth-form {
   display: flex;
   flex-direction: column;
   gap: 16px;
 }
 
+/* Side by side fields like First Name and Last Name */
 .auth-row {
   display: flex;
   gap: 12px;
 }
 
+/* Single form field wrapper */
 .auth-field {
   display: flex;
   flex-direction: column;
@@ -1033,10 +910,9 @@ body {
   outline: none;
 }
 
-.auth-field input:focus {
-  border-color: #E8650A;
-}
+.auth-field input:focus { border-color: #E8650A; }
 
+/* Phone number input special styling */
 .phone-input {
   background-color: #1a1a1a;
   border: 1px solid #333333;
@@ -1057,6 +933,7 @@ body {
   border: none;
 }
 
+/* Password strength rules shown below password field */
 .password-rules {
   display: flex;
   flex-direction: column;
@@ -1064,18 +941,17 @@ body {
   margin-top: 4px;
 }
 
-.rule-pass {
-  color: #22cc66;
+.rule {
+  display: block;
   font-size: 0.82rem;
-  margin: 0;
+  color: #888;
+  margin: 2px 0;
 }
 
-.rule-fail {
-  color: #888888;
-  font-size: 0.82rem;
-  margin: 0;
-}
+.rule.valid { color: #22cc66; }
+.rule.error { color: #ff4d4d; }
 
+/* The main orange submit button */
 .auth-btn {
   background-color: #E8650A;
   color: #ffffff;
@@ -1088,15 +964,10 @@ body {
   margin-top: 8px;
 }
 
-.auth-btn:hover {
-  background-color: #cf5a09;
-}
+.auth-btn:hover { background-color: #cf5a09; }
+.auth-btn:disabled { background-color: #555555; cursor: not-allowed; }
 
-.auth-btn:disabled {
-  background-color: #555555;
-  cursor: not-allowed;
-}
-
+/* Switch link at the bottom like "Already have an account? Login" */
 .auth-switch {
   text-align: center;
   color: #aaaaaa;
@@ -1110,21 +981,9 @@ body {
   font-weight: 600;
 }
 
-.auth-switch span:hover {
-  text-decoration: underline;
-}
+.auth-switch span:hover { text-decoration: underline; }
 
-.auth-success {
-  background-color: #0f2a1a;
-  border: 1px solid #22cc66;
-  color: #22cc66;
-  padding: 12px;
-  border-radius: 8px;
-  margin-bottom: 16px;
-  font-size: 0.9rem;
-}
-
-/* Password Toggle */
+/* Password show/hide toggle wrapper */
 .password-wrapper {
   position: relative;
   display: flex;
@@ -1136,6 +995,7 @@ body {
   padding-right: 40px;
 }
 
+/* Eye icon to show/hide password */
 .eye-icon {
   position: absolute;
   right: 12px;
@@ -1144,26 +1004,53 @@ body {
   user-select: none;
 }
 
-.rule {
-  display: block;
-  font-size: 0.82rem;
-  color: #888;
-  margin: 2px 0;
-}
-
-.rule.valid {
-  color: #22cc66;
-}
-.rule.error {
-  color: #ff4d4d;
-}
-
-.toggle-right {
+/* -------------------- GOOGLE BUTTON -------------------- */
+/* White button with Google G icon for OAuth login */
+.google-btn {
   display: flex;
-  gap: 10px;
   align-items: center;
+  justify-content: center;
+  gap: 12px;
+  width: 100%;
+  padding: 12px;
+  background-color: #ffffff;
+  color: #1a1a1a;
+  border: 1px solid #dddddd;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  margin-bottom: 16px;
 }
-/* Profile Page */
+
+.google-btn:hover { background-color: #f5f5f5; }
+
+/* -------------------- OR CONTINUE WITH DIVIDER -------------------- */
+/* Horizontal line with text in the middle */
+.auth-divider {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  margin: 20px 0;
+  color: #888888;
+  font-size: 13px;
+}
+
+.auth-divider::before,
+.auth-divider::after {
+  content: '';
+  flex: 1;
+  border-bottom: 1px solid #333333;
+}
+
+.auth-divider span {
+  padding: 0 12px;
+  white-space: nowrap;
+}
+
+/* -------------------- PROFILE PAGE -------------------- */
+/* The user profile page styles */
 .profile-header {
   display: flex;
   flex-direction: column;
@@ -1172,6 +1059,7 @@ body {
   margin-bottom: 24px;
 }
 
+/* Orange circle avatar showing user initials */
 .profile-avatar {
   width: 70px;
   height: 70px;
@@ -1186,6 +1074,7 @@ body {
   margin-top: 8px;
 }
 
+/* Verified or unverified badge */
 .profile-badge {
   padding: 4px 12px;
   border-radius: 20px;
@@ -1203,6 +1092,7 @@ body {
   color: #ff4d4d;
 }
 
+/* List of profile fields */
 .profile-details {
   display: flex;
   flex-direction: column;
@@ -1210,6 +1100,7 @@ body {
   margin-bottom: 24px;
 }
 
+/* Each row in the profile details */
 .profile-field {
   display: flex;
   justify-content: space-between;
@@ -1229,11 +1120,13 @@ body {
   text-align: right;
 }
 
+/* Back and Logout buttons at the bottom */
 .profile-actions {
   display: flex;
   gap: 10px;
   justify-content: center;
 }
+
 .profile-wrapper {
   display: flex;
   flex-direction: column;
@@ -1245,4 +1138,134 @@ body {
 .profile-wrapper .profile-avatar {
   margin-bottom: 16px;
   z-index: 1;
+}
+
+/* -------------------- MOBILE MENU BUTTON -------------------- */
+/* Floating hamburger button on mobile */
+.mobile-menu-btn {
+  display: none;
+}
+
+/* -------------------- MOBILE RESPONSIVE STYLES -------------------- */
+@media (max-width: 768px) {
+
+  html { overflow: hidden; }
+  body { padding: 0; overflow: hidden; }
+  #root { padding: 0; }
+
+  .chat-container {
+    height: 100vh;
+    border-radius: 0;
+    width: 100%;
+    border: none;
+    overflow: visible;
+  }
+
+  .message { max-width: 90%; }
+  .header-subtitle { display: none; }
+
+  .chat-header {
+    padding: 10px 12px;
+    gap: 8px;
+    overflow: visible;
+    min-height: 52px;
+  }
+
+  .header-title { font-size: 14px; }
+
+  .header-dot {
+    width: 8px;
+    height: 8px;
+    flex-shrink: 0;
+  }
+
+  .prompt-grid { grid-template-columns: 1fr; }
+
+  .welcome-message {
+    padding: 8px 12px;
+    gap: 0.5rem;
+    justify-content: center;
+    padding-top: 20px;
+  }
+
+  .welcome-icon { margin-top: 8px; }
+
+  .welcome-icon svg {
+    width: 28px;
+    height: 28px;
+  }
+
+  .welcome-title { font-size: 1.1rem; }
+  .welcome-subtitle { font-size: 0.8rem; }
+
+  .chip {
+    padding: 0.4rem 0.75rem;
+    font-size: 0.78rem;
+  }
+
+  .mobile-menu-btn {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    bottom: 16px;
+    right: 24px;
+    width: 44px;
+    height: 44px;
+    background: #f97316;
+    border: none;
+    border-radius: 50%;
+    padding: 14px;
+    cursor: pointer;
+    z-index: 1000;
+    box-shadow: 0 4px 20px rgba(249, 115, 22, 0.5);
+    transition: background 0.3s ease, transform 0.3s ease;
+  }
+
+  .mobile-menu-btn span {
+    display: block;
+    width: 22px;
+    height: 2px;
+    background: #fff;
+    border-radius: 2px;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    transform-origin: center;
+  }
+
+  .mobile-menu-btn.is-open span:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+  }
+
+  .mobile-menu-btn.is-open span:nth-child(2) { opacity: 0; }
+
+  .mobile-menu-btn.is-open span:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+  }
+
+  .library-sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    z-index: 900;
+    transform: translateX(-100%);
+    transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .library-sidebar.mobile-open { transform: translateX(0); }
+  .library-sidebar.panel-active { display: none; }
+
+  .sidebar-panel {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: auto;
+    max-height: 80vh;
+    border-radius: 0 0 16px 16px;
+    overflow-y: auto;
+    z-index: 1100;
+    box-sizing: border-box;
+  }
 }
