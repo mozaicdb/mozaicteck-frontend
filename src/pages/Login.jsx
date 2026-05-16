@@ -18,7 +18,7 @@ function Login() {
   useEffect(() => {
     const params = new URLSearchParams(location.search)
     if (params.get('error') === 'use_password') {
-      setError('This email is already registered. Please login with your password instead.')
+      setError('This email was registered with a password. Please enter your email and password below to login, or click Forgot Password if you have forgotten it.')
     }
   }, [location.search])
 
