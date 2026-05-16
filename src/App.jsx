@@ -14,6 +14,16 @@ function PrivateRoute({ children }) {
   const [status, setStatus] = useState('checking')
 
   useEffect(() => {
+    // Check if there is a Google OAuth token in the URL.
+    // If yes, allow access so Chatbot.jsx can exchange it for cookies.
+    const params = new URLSearchParams(window.location.search)
+    const gt = params.get('gt')
+
+    if (gt) {
+      setStatus('allowed')
+      return
+    }
+
     getMe()
       .then(result => {
         if (result && result.user) {
